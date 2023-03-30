@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class Entity
+    public interface IEntity
     {
-        public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
+        int Id { get; set; }
+        DateTime CreateDate { get; set; }
+        DateTime ModifiedDate { get; set; }
     }
 }

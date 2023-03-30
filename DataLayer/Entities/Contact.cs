@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class Contact : Entity
+    public class Contact : IEntity
     {
+        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         public string Name { get; set; } = null!;
         public string? StreetName { get; set; }
         public string? city { get; set; }

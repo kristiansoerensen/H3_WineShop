@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class ProductImage : Entity
+    public class ProductImage : IEntity
     {
+        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         [Required(ErrorMessage = "Href is required!")]
         public string Href { get; set; } = null!;
         [Required]

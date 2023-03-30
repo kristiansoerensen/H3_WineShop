@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class BasketItem : Entity
+    public class BasketItem : IEntity
     {
+        public int Id { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
         [Required]
         public int ShoppingCartId { get; set; }
         public Basket ShoppingCart { get; set; } = null!;
