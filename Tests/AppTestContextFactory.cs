@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Tests
+namespace xUnitTest
 {
     public class AppTestContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
