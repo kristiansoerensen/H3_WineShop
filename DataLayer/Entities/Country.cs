@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class Image : Entity
+    public class Country : Entity
     {
+        public string Name { get; set; } = null!;
     }
 }

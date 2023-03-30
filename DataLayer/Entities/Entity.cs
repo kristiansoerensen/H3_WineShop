@@ -10,6 +10,6 @@ namespace DataLayer.Entities
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime WriteDate { get; set; }
+        public DateTime ModifiedDate { get; set; }
     }
 }

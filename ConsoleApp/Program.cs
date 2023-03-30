@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using DataLayer;
+using Microsoft.Extensions.Configuration;
+
+namespace EFGetStarted
+{
+    class Program
+    {
+        static void Main()
+        {
+           
+        }
+    }
+}
