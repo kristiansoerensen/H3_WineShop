@@ -10,5 +10,6 @@ namespace DataLayer.Core.Repositories.Interfaces
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+
     }
 }

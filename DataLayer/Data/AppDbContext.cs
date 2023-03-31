@@ -1,4 +1,5 @@
-﻿using DataLayer.Entities;
+﻿using Bogus;
+using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,7 +27,18 @@ namespace DataLayer.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //int product_ids = 1;
+            //var Products = new Faker<Product>()
+            //    .RuleFor(p => p.Id, f => product_ids++)
+            //    .RuleFor(p => p.Name, f => f.Commerce.ProductName())
+            //    .RuleFor(p => p.Price, f => f.Commerce.Price(1).First())
+            //    .RuleFor(p => p.SKU, f => f.Commerce.Ean8())
+            //    .RuleFor(p => p.CreateDate, f => DateTime.Now)
+            //    .RuleFor(p => p.ModifiedDate, f => DateTime.Now);
 
+            //modelBuilder
+            //.Entity<Product>()
+            //.HasData(Products.GenerateBetween(10, 20));
         }
         DbSet<Category> Categories { get; set; }
         DbSet<Contact> Contacts { get; set; }

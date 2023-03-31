@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230331064512_InitialCreate")]
+    [Migration("20230331074634_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -208,7 +208,7 @@ namespace DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BrandId")
+                    b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CategoryId")
@@ -318,9 +318,7 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Entities.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.HasOne("DataLayer.Entities.Category", "Category")
                         .WithMany()
