@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -23,8 +24,11 @@ namespace DataLayer.Entities
         public string? SKU { get; set; }
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }
-        public bool active { get; set; }
-
+        [DefaultValue(true)]
+        public bool active { get; set; } = true;
+        public int? BrandId { get; set; }
+        [ForeignKey(nameof(BrandId))]
+        public Brand? Brand { get; set; }
         public ICollection<ProductImage>? Images { get; set; }
 
     }

@@ -28,6 +28,7 @@ namespace DataLayer.Data
         public IBasketItemRepository BasketItems { get; private set; }
 
         public IBasketRepository Baskets { get; private set; }
+        public IBrandRepository Brands { get; private set; }
 
     public UnitOfWork(
             AppDbContext context/*, ILogger logger*/)
@@ -42,6 +43,7 @@ namespace DataLayer.Data
             this.Category = new CategoryRepository(context);
             this.BasketItems = new BasketItemRepository(context);
             this.Baskets = new BasketRepository(context);
+            this.Brands = new BrandRepository(context);
         }
 
         public async Task CommitAsync()

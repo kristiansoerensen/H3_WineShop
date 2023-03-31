@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230330185022_InitialCreate")]
+    [Migration("20230331064512_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -80,6 +80,29 @@ namespace DataLayer.Migrations
                     b.HasIndex("ShoppingCartId");
 
                     b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Category", b =>
@@ -185,6 +208,9 @@ namespace DataLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
@@ -213,6 +239,8 @@ namespace DataLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
@@ -288,9 +316,17 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Entities.Product", b =>
                 {
+                    b.HasOne("DataLayer.Entities.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DataLayer.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -309,6 +345,11 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DataLayer.Entities.Basket", b =>
                 {
                     b.Navigation("CartLines");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Brand", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Product", b =>

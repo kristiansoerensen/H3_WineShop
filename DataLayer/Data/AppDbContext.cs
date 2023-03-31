@@ -35,6 +35,6 @@ namespace DataLayer.Data
         DbSet<Product> Products { get; set; }
         DbSet<Basket> Baskets { get; set; }
         DbSet<BasketItem> BasketItems { get; set; }
-
+        DbSet<Brand> Brands { get; set; }
     }
 }
