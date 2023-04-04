@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Data
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : DataService, IDisposable
     {
         private readonly AppDbContext _context;
         //private readonly ILogger _logger;

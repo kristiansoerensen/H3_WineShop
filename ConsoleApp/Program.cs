@@ -18,7 +18,7 @@ namespace EFGetStarted
 
             using (AppDbContext db = appContextFactory.CreateDbContext(args))
             {
-                IUnitOfWork unitOfWork = new UnitOfWork(db);
+                DataService unitOfWork = new UnitOfWork(db);
                 Product product = new Product
                 {
                     Name = "Test1",
