@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class User : IEntity
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int ContactId { get; set; }
-        public Contact Contact { get; set; } = null!;
-        public string Username { get; set; } = null!;
-        public string Password { get; set; } = null!;
+        public int? ContactId { get; set; }
+        public Contact? Contact { get; set; } = null!;
     }
 }
