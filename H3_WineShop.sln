@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTest", "Tests\xUnitTest.csproj", "{56455BDD-F958-45B8-984A-A106660437E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPageApp", "RazorPageApp\RazorPageApp.csproj", "{7E4F35DE-6A37-4877-9FDD-348401D9C229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPageApp", "RazorPageApp\RazorPageApp.csproj", "{7E4F35DE-6A37-4877-9FDD-348401D9C229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -51,7 +51,7 @@ namespace DataLayer.Core.Utils
             return _dbContext.AsNoTracking();
         }
 
-        public virtual async Task<T?> GetById(int Id)
+        public virtual async Task<T?> GetById(int? Id)
         {
             return await _dbContext.FindAsync(Id);
         }

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace DataLayer.Data
+namespace ServiceLayer
 {
     public class AppDbContext : DbContext
     {
@@ -48,6 +48,5 @@ namespace DataLayer.Data
         DbSet<Basket> Baskets { get; set; }
         DbSet<BasketItem> BasketItems { get; set; }
         DbSet<Brand> Brands { get; set; }
-        DbSet<User> Users { get; set; }
     }
 }

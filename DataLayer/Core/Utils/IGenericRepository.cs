@@ -9,7 +9,7 @@ namespace DataLayer.Core.Utils
     public interface IGenericRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        Task<T?> GetById(int Id);
+        Task<T?> GetById(int? Id);
         Task<bool> Add(T entity);
         bool Update(T entity);
         bool Delete(T entity);

@@ -1,12 +1,6 @@
 ﻿using ConsoleApp;
-using DataLayer;
-using DataLayer.Core.Utils;
 using DataLayer.Data;
 using DataLayer.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace EFGetStarted
 {
@@ -18,7 +12,7 @@ namespace EFGetStarted
 
             using (AppDbContext db = appContextFactory.CreateDbContext(args))
             {
-                DataService unitOfWork = new UnitOfWork(db);
+                DataContext unitOfWork = new DataContext(db);
                 Product product = new Product
                 {
                     Name = "Test1",

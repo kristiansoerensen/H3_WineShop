@@ -1,7 +1,5 @@
-using DataLayer.Core.Utils;
 using DataLayer.Data;
 using DataLayer.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace xUnitTest
 {
@@ -14,7 +12,7 @@ namespace xUnitTest
 
             using (AppDbContext dbContext = appTestContextFactory.CreateDbContext())
             {
-                DataService unitOfWork = new UnitOfWork(dbContext);
+                DataContext unitOfWork = new DataContext(dbContext);
                 unitOfWork.Products.Add(new Product { Name = "Test1" });
                 unitOfWork.CommitAsync().Wait();
                 Assert.Single(unitOfWork.Products.GetAll().ToList());
@@ -28,7 +26,7 @@ namespace xUnitTest
 
             using (AppDbContext dbContext = appTestContextFactory.CreateDbContext())
             {
-                DataService unitOfWork = new UnitOfWork(dbContext);
+                DataContext unitOfWork = new DataContext(dbContext);
                 unitOfWork.Products.Add(new Product { Name = "Write & Read" });
                 unitOfWork.CommitAsync().Wait();
                 Assert.Equal("Write & Read", unitOfWork.Products.GetAll().FirstOrDefault().Name);
@@ -42,7 +40,7 @@ namespace xUnitTest
 
             using (AppDbContext dbContext = appTestContextFactory.CreateDbContext())
             {
-                DataService unitOfWork = new UnitOfWork(dbContext);
+                DataContext unitOfWork = new DataContext(dbContext);
                 Product product = (new Product { Name = "Write & Delete" });
                 unitOfWork.Products.Add(product);
                 unitOfWork.CommitAsync().Wait();

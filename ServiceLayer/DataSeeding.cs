@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Data
+namespace ServiceLayer
 {
     public class DataSeeding
     {
@@ -35,7 +35,7 @@ namespace DataLayer.Data
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
                 .RuleFor(p => p.CountryId, f => f.PickRandom(this.Countries).Id)
                 .RuleFor(p => p.Name, f => f.Name.FullName())
-                .RuleFor(p => p.City, f => f.Address.City())
+                .RuleFor(p => p.city, f => f.Address.City())
                 .RuleFor(p => p.StreetName, f => f.Address.StreetAddress())
                 .RuleFor(p => p.ZipCode, f => f.Address.ZipCode())
                 .RuleFor(p => p.CreateDate, f => f.Date.Past())

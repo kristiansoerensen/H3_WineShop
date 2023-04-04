@@ -1,6 +1,5 @@
 ﻿using DataLayer.Core.Repositories;
 using DataLayer.Core.Repositories.Interfaces;
-using DataLayer.Core.Utils;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Data
 {
-    public class UnitOfWork : DataService, IDisposable
+    public class DataContext : IDataContext, IDisposable
     {
         private readonly AppDbContext _context;
         //private readonly ILogger _logger;
@@ -29,8 +28,9 @@ namespace DataLayer.Data
 
         public IBasketRepository Baskets { get; private set; }
         public IBrandRepository Brands { get; private set; }
+        public IUserRepository Users { get; private set; }
 
-    public UnitOfWork(
+    public DataContext(
             AppDbContext context/*, ILogger logger*/)
         {
             _context = context;
@@ -44,6 +44,7 @@ namespace DataLayer.Data
             this.BasketItems = new BasketItemRepository(context);
             this.Baskets = new BasketRepository(context);
             this.Brands = new BrandRepository(context);
+            this.Users = new UserRepository(context);
         }
 
         public async Task CommitAsync()

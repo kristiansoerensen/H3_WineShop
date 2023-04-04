@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.Core.Utils
+namespace DataLayer.Data
 {
-    public interface IUnitOfWork
+    public interface IDataContext
     {
         IProductRepository Products { get; }
         IProductImageRepository ProductImages { get; }
@@ -16,6 +16,7 @@ namespace DataLayer.Core.Utils
         ICategoryRepository Category { get; }
         IBasketItemRepository BasketItems { get; }
         IBasketRepository Baskets { get; }
+        IUserRepository Users { get; }
         Task CommitAsync();
     }
 }
