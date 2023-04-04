@@ -43,10 +43,17 @@ namespace DataLayer.Data
                 .RuleFor(p => p.Mobile, f => f.Phone.PhoneNumber())
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(10);
-
-            this.ProductImages = new Faker<ProductImage>()
+            
+            this.Brands = new Faker<Brand>()
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
-                .RuleFor(p => p.Href, f => "https://solkaersvin.dk")
+                .RuleFor(p => p.Name, f => f.Vehicle.Manufacturer())
+                .RuleFor(p => p.CreateDate, f => f.Date.Past())
+                .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
+                .UseSeed(seed).Generate(10);
+            
+            this.Categories = new Faker<Category>()
+                .RuleFor(p => p.Id, f => f.IndexFaker + 1)
+                .RuleFor(p => p.Name, f => f.Commerce.Categories(1).First())
                 .RuleFor(p => p.CreateDate, f => f.Date.Past())
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(10);
@@ -56,10 +63,44 @@ namespace DataLayer.Data
                 .RuleFor(p => p.Name, f => f.Commerce.ProductName())
                 .RuleFor(p => p.Price, f => f.Commerce.Price(1).First())
                 .RuleFor(p => p.SKU, f => f.Commerce.Ean8())
+                .RuleFor(p => p.CategoryId, f => f.PickRandom(this.Categories).Id)
+                .RuleFor(p => p.BrandId, f => f.PickRandom(this.Brands).Id)
                 .RuleFor(p => p.CreateDate, f => f.Date.Past())
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
-                .UseSeed(seed).Generate(10);
+                .UseSeed(seed).Generate(100);
+
+            this.ProductImages = new Faker<ProductImage>()
+                .RuleFor(p => p.Id, f => f.IndexFaker + 1)
+                .RuleFor(p => p.ProductId, f => f.PickRandom(this.Products).Id)
+                .RuleFor(p => p.Href, f => "https://solkaersvin.dk")
+                .RuleFor(p => p.CreateDate, f => f.Date.Past())
+                .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
+                .UseSeed(seed).Generate(150);
+            
+            this.Baskets = new Faker<Basket>()
+                .RuleFor(p => p.Id, f => f.IndexFaker + 1)
+                .RuleFor(p => p.ContactId, f => f.PickRandom(this.Contacts).Id)
+                .RuleFor(p => p.CreateDate, f => f.Date.Past())
+                .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
+                .UseSeed(seed).Generate(150);
+            
+            this.BasketItems = new Faker<BasketItem>()
+                .RuleFor(p => p.Id, f => f.IndexFaker + 1)
+                .RuleFor(p => p.ProductId, f => f.PickRandom(this.Products).Id)
+                .RuleFor(p => p.BasketId, f => f.PickRandom(this.Baskets).Id)
+                .RuleFor(p => p.QTY, f => (decimal)RandomNumberBetween(1, 30))
+                .RuleFor(p => p.CreateDate, f => f.Date.Past())
+                .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
+                .UseSeed(seed).Generate(500);
         }
 
+        private static readonly Random random = new Random();
+
+        private static double RandomNumberBetween(double minValue, double maxValue)
+        {
+            var next = random.NextDouble();
+
+            return minValue + (next * (maxValue - minValue));
+        }
     }
 }

@@ -29,18 +29,16 @@ namespace DataLayer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //int product_ids = 1;
-            //var Products = new Faker<Product>()
-            //    .RuleFor(p => p.Id, f => product_ids++)
-            //    .RuleFor(p => p.Name, f => f.Commerce.ProductName())
-            //    .RuleFor(p => p.Price, f => f.Commerce.Price(1).First())
-            //    .RuleFor(p => p.SKU, f => f.Commerce.Ean8())
-            //    .RuleFor(p => p.CreateDate, f => DateTime.Now)
-            //    .RuleFor(p => p.ModifiedDate, f => DateTime.Now);
+            DataSeeding dataSeeder = new DataSeeding();
 
-            //modelBuilder
-            //.Entity<Product>()
-            //.HasData(Products.GenerateBetween(10, 20));
+            modelBuilder.Entity<Product>().HasData(dataSeeder.Products);
+            modelBuilder.Entity<ProductImage>().HasData(dataSeeder.ProductImages);
+            modelBuilder.Entity<Contact>().HasData(dataSeeder.Contacts);
+            modelBuilder.Entity<Category>().HasData(dataSeeder.Categories);
+            modelBuilder.Entity<Country>().HasData(dataSeeder.Countries);
+            modelBuilder.Entity<Basket>().HasData(dataSeeder.Baskets);
+            modelBuilder.Entity<BasketItem>().HasData(dataSeeder.BasketItems);
+            modelBuilder.Entity<Brand>().HasData(dataSeeder.Brands);
         }
         DbSet<Category> Categories { get; set; }
         DbSet<Contact> Contacts { get; set; }

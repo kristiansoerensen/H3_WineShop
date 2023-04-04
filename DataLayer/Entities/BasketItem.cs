@@ -14,8 +14,8 @@ namespace DataLayer.Entities
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         [Required]
-        public int ShoppingCartId { get; set; }
-        public Basket ShoppingCart { get; set; } = null!;
+        public int BasketId { get; set; }
+        public Basket Basket { get; set; } = null!;
         [Required]
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
