@@ -13,5 +13,6 @@ namespace DataLayer.Core.Utils
         Task<bool> Add(T entity);
         bool Update(T entity);
         bool Delete(T entity);
+        string DumpJson(Object? entity = null);
     }
 }

@@ -13,10 +13,11 @@ namespace DataLayer.Data
         IProductImageRepository ProductImages { get; }
         ICountryRepository Countries { get; }
         IContactRepository Contacts { get; }
-        ICategoryRepository Category { get; }
+        ICategoryRepository Categories { get; }
         IBasketItemRepository BasketItems { get; }
         IBasketRepository Baskets { get; }
         IUserRepository Users { get; }
+        IBrandRepository Brands { get; }
         Task CommitAsync();
     }
 }

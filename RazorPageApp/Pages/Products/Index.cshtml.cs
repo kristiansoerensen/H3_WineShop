@@ -18,7 +18,7 @@ namespace RazorPageApp.Pages.Products
 
         public async Task OnGetAsync()
         {
-            this.Products = await _context.Products.GetAll().ToListAsync();
+            this.Products = await _context.Products.GetAll().Include(p => p.Category).Include(p => p.Brand).ToListAsync();
         }
     }
 }

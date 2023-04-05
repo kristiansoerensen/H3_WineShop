@@ -22,11 +22,15 @@ namespace DataLayer.Entities
         [Precision(10, 4)]
         public decimal? Price { get; set; }
         public string? SKU { get; set; }
+        [DisplayName("Category")]
         public int? CategoryId { get; set; }
+        [DisplayName("Category")]
         public Category? Category { get; set; }
         [DefaultValue(true)]
         public bool active { get; set; } = true;
+        [DisplayName("Brand")]
         public int? BrandId { get; set; }
+        [DisplayName("Brand")]
         [ForeignKey(nameof(BrandId))]
         public Brand? Brand { get; set; }
         public ICollection<ProductImage>? Images { get; set; }

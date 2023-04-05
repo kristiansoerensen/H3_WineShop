@@ -2,6 +2,7 @@
 using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,11 @@ namespace DataLayer.Core.Utils
         {
             _dbContext.Remove(entity);
             return true;
+        }
+
+        public string DumpJson(Object? entity = null)
+        {
+            return JsonConvert.SerializeObject(entity != null ? entity : this);
         }
 
         public virtual IQueryable<T> GetAll()

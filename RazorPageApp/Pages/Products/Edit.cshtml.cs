@@ -2,6 +2,7 @@ using DataLayer.Data;
 using DataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -10,12 +11,16 @@ namespace RazorPageApp.Pages.Products
     public class EditModel : PageModel
     {
         private readonly IDataContext _context;
+        private readonly ILogger<IndexModel> _logger;
         [BindProperty]
         public Product Product { get; set; } = default!;
+        public List<SelectListItem> Categories { get; set; } = default!;
+        public List<SelectListItem> Brands { get; set; } = default!;
 
-        public EditModel(IDataContext context)
+        public EditModel(IDataContext context, ILogger<IndexModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,6 +35,8 @@ namespace RazorPageApp.Pages.Products
                 return NotFound();
             }
             this.Product = product;
+            this.Categories = _context.Categories.GetAll().Select(p => new SelectListItem { Value=p.Id.ToString(), Text=p.Name}).ToList();
+            this.Brands = _context.Brands.GetAll().Select(p => new SelectListItem { Value=p.Id.ToString(), Text=p.Name}).ToList();
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
@@ -38,6 +45,8 @@ namespace RazorPageApp.Pages.Products
             {
                 return Page();
             }
+
+            this._logger.LogInformation(_context.Products.DumpJson(this.Product));
 
             _context.Products.Update(this.Product);
 
