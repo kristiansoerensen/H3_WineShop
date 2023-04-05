@@ -67,5 +67,9 @@ namespace DataLayer.Core.Utils
             _dbContext.Update(entity);
             return true;
         }
+        public IEnumerable<T> Pagination(IEnumerable<T> source, int page, int pageSize)
+        {
+            return source.Skip((page - 1) * pageSize).Take(pageSize);
+        }
     }
 }

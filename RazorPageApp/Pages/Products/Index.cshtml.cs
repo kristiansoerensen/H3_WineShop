@@ -10,6 +10,8 @@ namespace RazorPageApp.Pages.Products
     {
         private readonly IDataContext _context;
         public IList<Product> Products { get; set; } = default!;
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
 
         public IndexModel(IDataContext context)
         {
