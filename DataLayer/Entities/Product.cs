@@ -19,7 +19,7 @@ namespace DataLayer.Entities
         [MaxLength(50, ErrorMessage = "Name can max be lenght of 50")]
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        [Precision(10, 4)]
+        [Precision(10, 2)]
         public decimal? Price { get; set; }
         public string? SKU { get; set; }
         public int? CategoryId { get; set; }
