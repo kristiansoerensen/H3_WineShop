@@ -10,6 +10,8 @@ namespace RazorPageApp.Pages.Products
     {
         private readonly IDataContext _context;
         public IList<Product> Products { get; set; } = default!;
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
 
         public IndexModel(IDataContext context)
         {
@@ -18,7 +20,7 @@ namespace RazorPageApp.Pages.Products
 
         public async Task OnGetAsync()
         {
-            this.Products = await _context.Products.GetAll().ToListAsync();
+            this.Products = await _context.Products.GetAll().Include(p => p.Category).Include(p => p.Brand).ToListAsync();
         }
     }
 }

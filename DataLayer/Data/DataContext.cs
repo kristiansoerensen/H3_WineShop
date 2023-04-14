@@ -22,7 +22,7 @@ namespace DataLayer.Data
 
         public IContactRepository Contacts { get; private set; }
 
-        public ICategoryRepository Category { get; private set; }
+        public ICategoryRepository Categories { get; private set; }
 
         public IBasketItemRepository BasketItems { get; private set; }
 
@@ -40,7 +40,7 @@ namespace DataLayer.Data
             this.ProductImages = new ProductImageRepository(context);
             this.Countries = new CountryRepository(context);
             this.Contacts = new ContactRepository(context);
-            this.Category = new CategoryRepository(context);
+            this.Categories = new CategoryRepository(context);
             this.BasketItems = new BasketItemRepository(context);
             this.Baskets = new BasketRepository(context);
             this.Brands = new BrandRepository(context);

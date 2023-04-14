@@ -1,0 +1,51 @@
+﻿@model Product
+
+<!--Grid column-->
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <!--Card-->
+    <div class="card">
+
+        <!--Card image-->
+        <div class="view overlay">
+            @if (@Model.Images != null)
+            {
+                <img src="@Model.Images.GetEnumerator().Current.Href" class="card-img-top"
+                     alt="">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            }
+            else
+            {
+                <img src="/img/placeholder.png" class="card-img-top"
+                     alt="">
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            }
+            <img src="" class="card-img-top"
+                 alt="">
+            <a>
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+        <!--Card image-->
+        <!--Card content-->
+        <div class="card-body text-center">
+            <!--Category & Title-->
+            <a asp-page="./Details" asp-route-id="@Model.Id" class="grey-text">
+                <h5>@Model.Name</h5>
+            </a>
+
+            <h4 class="font-weight-bold blue-text">
+                <strong>@Model.Price</strong>
+            </h4>
+
+        </div>
+        <!--Card content-->
+
+    </div>
+    <!--Card-->
+
+</div>

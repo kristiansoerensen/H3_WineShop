@@ -27,7 +27,7 @@ namespace RazorPageApp.Pages.Products
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Category == null || Product == null)
+          if (!ModelState.IsValid || _context.Categories == null || Product == null)
             {
                 return Page();
             }

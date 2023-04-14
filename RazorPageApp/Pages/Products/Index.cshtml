@@ -10,7 +10,28 @@
     <a asp-page="Create">Create New</a>
 </p>
 
-<table class="table">
+
+
+
+<section class="text-center mb-4">
+
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+        @foreach (var product in Model.Products)
+        {
+            <partial name = "_ProductListItem" model="product"/>
+        }
+
+    </div>
+    <!--Grid row-->
+
+</section>
+
+
+
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -39,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
+                    @Html.DisplayFor(modelItem => item.Brand.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Category.Name)
@@ -58,4 +79,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@

@@ -2,6 +2,7 @@
 using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +46,20 @@ namespace DataLayer.Core.Utils
             _dbContext.Remove(entity);
             return true;
         }
+        public virtual bool DeleteRange(IEnumerable<T> entites)
+        {
+            _dbContext.RemoveRange(entites);
+            return true;
+        }
+
+        public string DumpJson(Object? entity = null)
+        {
+            return JsonConvert.SerializeObject(entity != null ? entity : this);
+        }
 
         public virtual IQueryable<T> GetAll()
         {
-            return _dbContext.AsNoTracking();
+            return _dbContext;
         }
 
         public virtual async Task<T?> GetById(int? Id)
@@ -60,6 +71,10 @@ namespace DataLayer.Core.Utils
         {
             _dbContext.Update(entity);
             return true;
+        }
+        public IEnumerable<T> Pagination(IEnumerable<T> source, int page, int pageSize)
+        {
+            return source.Skip((page - 1) * pageSize).Take(pageSize);
         }
     }
 }
