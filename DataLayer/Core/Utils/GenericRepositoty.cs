@@ -46,6 +46,11 @@ namespace DataLayer.Core.Utils
             _dbContext.Remove(entity);
             return true;
         }
+        public virtual bool DeleteRange(IEnumerable<T> entites)
+        {
+            _dbContext.RemoveRange(entites);
+            return true;
+        }
 
         public string DumpJson(Object? entity = null)
         {
@@ -54,7 +59,7 @@ namespace DataLayer.Core.Utils
 
         public virtual IQueryable<T> GetAll()
         {
-            return _dbContext.AsNoTracking();
+            return _dbContext;
         }
 
         public virtual async Task<T?> GetById(int? Id)
