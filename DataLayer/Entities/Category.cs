@@ -13,6 +13,6 @@ namespace DataLayer.Entities
         public DateTime ModifiedDate { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public bool active { get; set; }
+        public ICollection<ProductCategory>? ProductCategories { get; set; }
     }
 }

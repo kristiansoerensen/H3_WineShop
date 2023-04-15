@@ -39,6 +39,18 @@ namespace DataLayer.Data
             modelBuilder.Entity<Basket>().HasData(dataSeeder.Baskets);
             modelBuilder.Entity<BasketItem>().HasData(dataSeeder.BasketItems);
             modelBuilder.Entity<Brand>().HasData(dataSeeder.Brands);
+            modelBuilder.Entity<ProductCategory>().HasData(dataSeeder.ProductCategories);
+
+            modelBuilder.Entity<ProductCategory>()
+                .HasKey(bc => new { bc.ProductId, bc.CategoryId });
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(bc => bc.Product)
+                .WithMany(b => b.ProductCategories)
+                .HasForeignKey(bc => bc.ProductId);
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(bc => bc.Category)
+                .WithMany(c => c.ProductCategories)
+                .HasForeignKey(bc => bc.CategoryId);
         }
         DbSet<Category> Categories { get; set; }
         DbSet<Contact> Contacts { get; set; }
@@ -48,6 +60,6 @@ namespace DataLayer.Data
         DbSet<Basket> Baskets { get; set; }
         DbSet<BasketItem> BasketItems { get; set; }
         DbSet<Brand> Brands { get; set; }
-        DbSet<User> Users { get; set; }
+        DbSet<ProductCategory> ProductCategories { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace DataLayer.Data
         IBasketRepository Baskets { get; }
         IUserRepository Users { get; }
         IBrandRepository Brands { get; }
+        IProductCategoryRepository ProductCategories { get; }
         Task CommitAsync();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,10 +14,12 @@ namespace DataLayer.Entities
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        [Required(ErrorMessage = "Href is required!")]
-        public string Href { get; set; } = null!;
         [Required]
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string Filename { get; set; } = null!;
+        [NotMapped]
+        public IFormFile File { get; set; } = null!;
     }
 }

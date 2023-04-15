@@ -23,9 +23,7 @@ namespace DataLayer.Entities
         public decimal? Price { get; set; }
         public string? SKU { get; set; }
         [DisplayName("Category")]
-        public int? CategoryId { get; set; }
-        [DisplayName("Category")]
-        public Category? Category { get; set; }
+        public ICollection<ProductCategory>? ProductCategories { get; set; }
         [DefaultValue(true)]
         public bool active { get; set; } = true;
         [DisplayName("Brand")]
