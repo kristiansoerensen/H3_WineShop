@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace RazorPageApp.Pages.Shop
 {
@@ -13,6 +14,7 @@ namespace RazorPageApp.Pages.Shop
     {
         
         private readonly IDataContext _context;
+        private readonly ILogger<IndexModel> _logger;
         public IList<Product> Products { get; set; } = default!;
         public List<SelectListItem> Categories { get; set; } = default!;
         [BindProperty(SupportsGet = true)]
@@ -29,9 +31,10 @@ namespace RazorPageApp.Pages.Shop
         [BindProperty(SupportsGet = true)]
         public int Pages { get; set; } = default!;
 
-        public IndexModel(IDataContext context)
+        public IndexModel(IDataContext context, ILogger<IndexModel> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task OnGetAsync(string? SearchTerm, int[] CategoryIds, int CurrentPage = 1, int PageSize = 9, string OrderBy = "1")
@@ -45,35 +48,40 @@ namespace RazorPageApp.Pages.Shop
                 new SelectListItem { Text = "Price DESC", Value = "5"},
             };
 
-            var querey = _context.Products.GetAll();
+            var query = _context.Products.GetAll();
             if (SearchTerm != null)
             {
-                querey = querey.Where(p => p.Name.Contains(SearchTerm));
+                query = query.Where(p => p.Name.Contains(SearchTerm));
+            }
+            if (CategoryIds != null && CategoryIds.Count() > 0)
+            {
+                //List<ProductCategory> productCategories = await _context.ProductCategories.GetAll().Where(pc => CategoryIds.Contains(pc.CategoryId)).ToListAsync();
+                query = query.Where(p => p.ProductCategories.Any(pc => CategoryIds.Contains(pc.CategoryId)));
             }
             switch (OrderBy)
             {
                 case "1":
                     break;
                 case "2":
-                    querey = querey.OrderBy(p => p.Name);
+                    query = query.OrderBy(p => p.Name);
                     break;
                 case "3":
-                    querey = querey.OrderByDescending(p => p.Name);
+                    query = query.OrderByDescending(p => p.Name);
                     break;
                 case "4":
-                    querey = querey.OrderBy(p => p.Price);
+                    query = query.OrderBy(p => p.Price);
                     break;
                 case "5":
-                    querey = querey.OrderByDescending(p => p.Price);
+                    query = query.OrderByDescending(p => p.Price);
                     break;
                 default:
                     break;
             }
 
             //this.Products = await querey.Page(CurrentPage, PageSize).Include(p => p.Category).Include(p => p.Brand).Include(p => p.Images).ToListAsync();
-            this.Products = await querey.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).ToListAsync();
-            this.Pages = ((querey.Count() - 1) / PageSize) + 1;
-            this.Categories = await _context.Categories.GetAll().Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name }).ToListAsync();
+            this.Products = await query.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).Include(p => p.ProductCategories).ToListAsync();
+            this.Pages = ((query.Count() - 1) / PageSize) + 1;
+            this.Categories = await _context.Categories.GetAll().Select(i => new SelectListItem { Value = i.Id.ToString(), Text = i.Name, Selected = CategoryIds.Contains(i.Id) ? true : false }).ToListAsync();
         }
     }
 }
