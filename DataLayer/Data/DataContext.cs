@@ -12,15 +12,12 @@ namespace DataLayer.Data
     public class DataContext : IDataContext, IDisposable
     {
         private readonly AppDbContext _context;
-        //private readonly ILogger _logger;
 
         public IProductRepository Products { get; private set; }
 
         public IProductImageRepository ProductImages { get; private set; }
 
         public ICountryRepository Countries { get; private set; }
-
-        public IContactRepository Contacts { get; private set; }
 
         public ICategoryRepository Categories { get; private set; }
 
@@ -32,21 +29,20 @@ namespace DataLayer.Data
         public IProductCategoryRepository ProductCategories { get; private set; }
 
     public DataContext(
-            AppDbContext context/*, ILogger logger*/)
+            AppDbContext context, ILoggerFactory logger)
         {
             _context = context;
-            //_logger = logger;
+            var _logger = logger.CreateLogger("logs");
 
-            this.Products = new ProductRepository(context);
-            this.ProductImages = new ProductImageRepository(context);
-            this.Countries = new CountryRepository(context);
-            this.Contacts = new ContactRepository(context);
-            this.Categories = new CategoryRepository(context);
-            this.BasketItems = new BasketItemRepository(context);
-            this.Baskets = new BasketRepository(context);
-            this.Brands = new BrandRepository(context);
-            this.Users = new UserRepository(context);
-            this.ProductCategories = new ProductCategoryRepository(context);
+            this.Products = new ProductRepository(context, _logger);
+            this.ProductImages = new ProductImageRepository(context, _logger);
+            this.Countries = new CountryRepository(context, _logger);
+            this.Categories = new CategoryRepository(context, _logger);
+            this.BasketItems = new BasketItemRepository(context, _logger);
+            this.Baskets = new BasketRepository(context, _logger);
+            this.Brands = new BrandRepository(context, _logger);
+            this.Users = new UserRepository(context, _logger);
+            this.ProductCategories = new ProductCategoryRepository(context, _logger);
         }
 
         public async Task CommitAsync()

@@ -13,7 +13,7 @@ namespace DataLayer.Core.Repositories
 {
     public class CountryRepository : GenericRepositoty<Country>, ICountryRepository
     {
-        public CountryRepository(AppDbContext context/*, ILogger logger*/) : base(context/*, logger*/)
+        public CountryRepository(AppDbContext context, ILogger logger) : base(context, logger)
         {
         }
     }

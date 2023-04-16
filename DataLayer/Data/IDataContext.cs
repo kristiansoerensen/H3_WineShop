@@ -12,7 +12,6 @@ namespace DataLayer.Data
         IProductRepository Products { get; }
         IProductImageRepository ProductImages { get; }
         ICountryRepository Countries { get; }
-        IContactRepository Contacts { get; }
         ICategoryRepository Categories { get; }
         IBasketItemRepository BasketItems { get; }
         IBasketRepository Baskets { get; }

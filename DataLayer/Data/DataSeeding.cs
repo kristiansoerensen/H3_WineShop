@@ -15,7 +15,6 @@ namespace DataLayer.Data
         public List<BasketItem> BasketItems { get; set; }
         public List<Brand> Brands { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Contact> Contacts { get; set; }
         public List<Country> Countries { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductImage> ProductImages { get; set; }
@@ -32,18 +31,18 @@ namespace DataLayer.Data
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(10);
 
-            this.Contacts = new Faker<Contact>()
-                .RuleFor(p => p.Id, f => f.IndexFaker + 1)
-                .RuleFor(p => p.CountryId, f => f.PickRandom(this.Countries).Id)
-                .RuleFor(p => p.Name, f => f.Name.FullName())
-                .RuleFor(p => p.City, f => f.Address.City())
-                .RuleFor(p => p.StreetName, f => f.Address.StreetAddress())
-                .RuleFor(p => p.ZipCode, f => f.Address.ZipCode())
-                .RuleFor(p => p.CreateDate, f => f.Date.Past())
-                .RuleFor(p => p.Phone, f => f.Phone.PhoneNumber())
-                .RuleFor(p => p.Mobile, f => f.Phone.PhoneNumber())
-                .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
-                .UseSeed(seed).Generate(10);
+            //this.Contacts = new Faker<Contact>()
+            //    .RuleFor(p => p.Id, f => f.IndexFaker + 1)
+            //    .RuleFor(p => p.CountryId, f => f.PickRandom(this.Countries).Id)
+            //    .RuleFor(p => p.Name, f => f.Name.FullName())
+            //    .RuleFor(p => p.City, f => f.Address.City())
+            //    .RuleFor(p => p.StreetName, f => f.Address.StreetAddress())
+            //    .RuleFor(p => p.ZipCode, f => f.Address.ZipCode())
+            //    .RuleFor(p => p.CreateDate, f => f.Date.Past())
+            //    .RuleFor(p => p.Phone, f => f.Phone.PhoneNumber())
+            //    .RuleFor(p => p.Mobile, f => f.Phone.PhoneNumber())
+            //    .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
+            //    .UseSeed(seed).Generate(10);
             
             this.Brands = new Faker<Brand>()
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
@@ -85,7 +84,6 @@ namespace DataLayer.Data
 
             this.Baskets = new Faker<Basket>()
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
-                .RuleFor(p => p.ContactId, f => f.PickRandom(this.Contacts).Id)
                 .RuleFor(p => p.CreateDate, f => f.Date.Past())
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(150);

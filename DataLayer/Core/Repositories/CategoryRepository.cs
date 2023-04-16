@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Core.Repositories
 {
-    public class ContactRepository : GenericRepositoty<Contact>, IContactRepository
+    public class CategoryRepository : GenericRepositoty<Category>, ICategoryRepository
     {
-        public ContactRepository(AppDbContext context/*, ILogger logger*/) : base(context/*, logger*/)
+        public CategoryRepository(AppDbContext context, ILogger logger) : base(context, logger)
         {
         }
     }

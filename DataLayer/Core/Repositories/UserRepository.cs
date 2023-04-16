@@ -13,7 +13,7 @@ namespace DataLayer.Core.Repositories
 {
     public class UserRepository : GenericRepositoty<User>, IUserRepository
     {
-        public UserRepository(AppDbContext context/*, ILogger logger*/) : base(context/*, logger*/)
+        public UserRepository(AppDbContext context, ILogger logger) : base(context, logger)
         {
         }
     }

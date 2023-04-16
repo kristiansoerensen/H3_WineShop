@@ -12,7 +12,14 @@ namespace DataLayer.Entities
     {
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int? ContactId { get; set; }
-        public Contact? Contact { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string? StreetName { get; set; }
+        public string? City { get; set; }
+        public string? ZipCode { get; set; }
+        public int? CountryId { get; set; }
+        public Country? Country { get; set; }
+        public string? Phone { get; set; }
+        public string? Mobile { get; set; }
+        public ICollection<Basket>? Baskets { get; set;}
     }
 }

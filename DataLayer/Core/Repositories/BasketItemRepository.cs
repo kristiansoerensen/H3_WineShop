@@ -13,7 +13,7 @@ namespace DataLayer.Core.Repositories
 {
     public class BasketItemRepository : GenericRepositoty<BasketItem>, IBasketItemRepository
     {
-        public BasketItemRepository(AppDbContext context/*, ILogger logger*/) : base(context/*, logger*/)
+        public BasketItemRepository(AppDbContext context, ILogger logger) : base(context, logger)
         {
         }
     }

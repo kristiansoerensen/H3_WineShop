@@ -13,7 +13,7 @@ namespace DataLayer.Core.Repositories
 {
     public class BrandRepository : GenericRepositoty<Brand>, IBrandRepository
     {
-        public BrandRepository(AppDbContext context/*, ILogger logger*/) : base(context/*, logger*/)
+        public BrandRepository(AppDbContext context, ILogger logger) : base(context, logger)
         {
         }
     }

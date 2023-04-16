@@ -16,24 +16,15 @@ namespace DataLayer.Core.Utils
     {
         protected AppDbContext _context;
         internal DbSet<T> _dbContext;
-        //protected ILogger _logger;
+        protected ILogger _logger;
 
         public GenericRepositoty(
-            AppDbContext context)
+            AppDbContext context, ILogger logger)
         {
             _context = context;
             _dbContext = _context.Set<T>();
+            _logger = logger;   
         }
-
-        // With Logger
-        //public GenericRepositoty(
-        //    WineStoreContext context,
-        //    ILogger logger)
-        //{
-        //    _context = context;
-        //    _logger = logger;
-        //    this._dbSet = _context.Set<T>();
-        //}
 
         public virtual async Task<bool> Add(T entity)
         {

@@ -33,7 +33,6 @@ namespace DataLayer.Data
 
             modelBuilder.Entity<Product>().HasData(dataSeeder.Products);
             modelBuilder.Entity<ProductImage>().HasData(dataSeeder.ProductImages);
-            modelBuilder.Entity<Contact>().HasData(dataSeeder.Contacts);
             modelBuilder.Entity<Category>().HasData(dataSeeder.Categories);
             modelBuilder.Entity<Country>().HasData(dataSeeder.Countries);
             modelBuilder.Entity<Basket>().HasData(dataSeeder.Baskets);
@@ -52,15 +51,14 @@ namespace DataLayer.Data
                 .WithMany(c => c.ProductCategories)
                 .HasForeignKey(bc => bc.CategoryId);
         }
-        DbSet<Category> Categories { get; set; }
-        DbSet<Contact> Contacts { get; set; }
-        DbSet<Country> Countries { get; set; }
-        DbSet<ProductImage> Images { get; set; }
-        DbSet<Product> Products { get; set; }
-        DbSet<Basket> Baskets { get; set; }
-        DbSet<BasketItem> BasketItems { get; set; }
-        DbSet<Brand> Brands { get; set; }
-        DbSet<ProductCategory> ProductCategories { get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<ProductImage> Images { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
