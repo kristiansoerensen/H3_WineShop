@@ -30,7 +30,7 @@ namespace RazorPageApp.Pages.Shop
             if (username != null)
             {
                 User? user = await _userManager.FindByNameAsync(username);
-                _logger.LogInformation($"Logged in userid########:{user.Id}");
+                _logger.LogInformation($"Logged in userid########:{user?.Id}");
             }
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyCart)))
             {
