@@ -61,5 +61,6 @@ namespace DataLayer.Data
         DbSet<BasketItem> BasketItems { get; set; }
         DbSet<Brand> Brands { get; set; }
         DbSet<ProductCategory> ProductCategories { get; set; }
+        DbSet<User> Users { get; set; }
     }
 }
