@@ -18,11 +18,30 @@ namespace DataLayer.Data
         public List<Country> Countries { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public List<PaymentProvider> PaymentProviders { get; set; }
 
 
         public DataSeeding()
         {
             int seed = 1;
+
+            this.PaymentProviders = new List<PaymentProvider>
+            {
+                new PaymentProvider
+                {
+                    Id = 1,
+                    Name = "PayPal",
+                    ModifiedDate = DateTime.Now,
+                    CreateDate = DateTime.Now
+                },
+                new PaymentProvider
+                {
+                    Id = 2,
+                    Name = "Bank Transfer",
+                    ModifiedDate = DateTime.Now,
+                    CreateDate = DateTime.Now
+                }
+            };
 
             this.Countries = new Faker<Country>()
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
@@ -203,6 +222,8 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Tasty_Granite_Chicken")
                     .RuleFor(p => p.Filename, f => "Tasty_Granite_Chicken.jpg")
                     .UseSeed(seed).Generate()
+
+                
             };
         }
 

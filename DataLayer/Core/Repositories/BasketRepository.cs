@@ -21,6 +21,7 @@ namespace DataLayer.Core.Repositories
         public void UpdateQty(Basket basket, BasketItem basketItem, int qty)
         {
             basketItem.QTY = qty;
+            basketItem.Total = basketItem.Product.Price * basketItem.QTY;
             this._context.SaveChanges();
             ComputeBasketTotal(basket);
         }

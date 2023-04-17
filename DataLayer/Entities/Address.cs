@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Entities
 {
-    public class User : IdentityUser
+    public class PaymentProvider : IEntity
     {
+        public int Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public ICollection<Address>? Addresses { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

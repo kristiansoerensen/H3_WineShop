@@ -1,0 +1,36 @@
+﻿@page
+@model OrdersModel
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["ActivePage"] = ManageNavPages.Orders;
+}
+
+<h3>@ViewData["Title"]</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order number #
+            </th>
+            <th>
+                Total
+            </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Baskets)
+        {
+            <tr>
+                <td>
+                    #@item.Id
+                </td>
+                <td>
+                    $@item.Total
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

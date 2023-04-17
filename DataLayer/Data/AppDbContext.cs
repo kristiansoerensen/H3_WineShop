@@ -39,6 +39,7 @@ namespace DataLayer.Data
             modelBuilder.Entity<BasketItem>().HasData(dataSeeder.BasketItems);
             modelBuilder.Entity<Brand>().HasData(dataSeeder.Brands);
             modelBuilder.Entity<ProductCategory>().HasData(dataSeeder.ProductCategories);
+            modelBuilder.Entity<PaymentProvider>().HasData(dataSeeder.PaymentProviders);
 
             modelBuilder.Entity<ProductCategory>()
                 .HasKey(bc => new { bc.ProductId, bc.CategoryId });

@@ -20,6 +20,7 @@ namespace DataLayer.Entities
         public int ProductId { get; set; }
         public Product Product { get; set; } = null!;
         public int QTY { get; set; } // Quantity of products
-
+        [Precision(10, 2)]
+        public decimal? Total { get; set; }
     }
 }

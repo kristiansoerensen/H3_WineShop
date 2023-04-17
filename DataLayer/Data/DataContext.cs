@@ -27,8 +27,10 @@ namespace DataLayer.Data
         public IBrandRepository Brands { get; private set; }
         public IUserRepository Users { get; private set; }
         public IProductCategoryRepository ProductCategories { get; private set; }
+        public IAddressRepository Addresses { get; private set; }
+        public IPaymentProviderRepository PaymentProviders { get; private set; }
 
-    public DataContext(
+        public DataContext(
             AppDbContext context, ILoggerFactory logger)
         {
             _context = context;
@@ -43,6 +45,8 @@ namespace DataLayer.Data
             this.Brands = new BrandRepository(context, _logger);
             this.Users = new UserRepository(context, _logger);
             this.ProductCategories = new ProductCategoryRepository(context, _logger);
+            this.Addresses = new AddressRepository(context, _logger);
+            this.PaymentProviders = new PaymentProviderRepository(context, _logger);
         }
 
         public async Task CommitAsync()

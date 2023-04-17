@@ -34,7 +34,7 @@ namespace RazorPageApp.Pages.Shop.Cart
 
         public async Task<Basket?> GetBasket()
         {
-            User? user = await GetUser();
+            User? user = await _userManager.GetUserAsync(User);
             Basket? basket = null;
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyBasket)))
             {
@@ -58,17 +58,6 @@ namespace RazorPageApp.Pages.Shop.Cart
             HttpContext.Session.SetInt32(SessionKeyBasket, basket.Id);
             this._logger.LogInformation($"Created new basketId: {basket?.Id}");
             return basket;
-        }
-        public async Task<User?> GetUser()
-        {
-            User? user = null;
-            string? username = HttpContext.User.Identity?.Name;
-            if (username != null)
-            {
-                user = await _userManager.FindByNameAsync(username);
-            }
-            _logger.LogInformation($"UserId: {user?.Id}");
-            return user;
         }
     }
 }

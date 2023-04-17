@@ -19,5 +19,15 @@ namespace DataLayer.Entities
         public List<BasketItem>? CartLines { get; set; }
         [Precision(10, 2)]
         public decimal? Total { get; set; }
+
+        public int? BillingAddressId { get; set; }
+        [ForeignKey(nameof(BillingAddressId))]
+        public Address? BillingAddress { get; set; }
+        public int? ShippingAddressId { get; set; }
+        [ForeignKey(nameof(ShippingAddressId))]
+        public Address? ShippingAddress { get; set; }
+        public int? PaymentProviderId { get; set; }
+        public PaymentProvider? PaymentProvider { get; set; }
+        public string state { get; set; } = "draft";
     }
 }
