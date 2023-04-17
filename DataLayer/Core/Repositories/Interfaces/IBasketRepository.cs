@@ -10,7 +10,9 @@ namespace DataLayer.Core.Repositories.Interfaces
 {
     public interface IBasketRepository : IGenericRepository<Basket>
     {
-        void AddToBasket(Basket basket, Product product, decimal qty = 1.0m);
+        void AddToBasket(Basket basket, Product product, int qty = 1);
         IQueryable<BasketItem> GetBasketItems(Basket basket);
+        void UpdateQty(Basket basket, BasketItem basketItem, int qty);
+        void ComputeBasketTotal(Basket basket);
     }
 }

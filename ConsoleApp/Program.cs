@@ -1,6 +1,7 @@
 ﻿using ConsoleApp;
 using DataLayer.Data;
 using DataLayer.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace EFGetStarted
 {
@@ -12,7 +13,8 @@ namespace EFGetStarted
 
             using (AppDbContext db = appContextFactory.CreateDbContext(args))
             {
-                DataContext unitOfWork = new DataContext(db);
+                var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+                DataContext unitOfWork = new DataContext(db, loggerFactory);
                 Product product = new Product
                 {
                     Name = "Test1",

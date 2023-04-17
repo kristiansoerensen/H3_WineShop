@@ -12,4 +12,10 @@ $(document).ready(function () {
             },
         });
     }
+    $.ajax({
+        url: "/Shop/Cart/Count", success: function (result) {
+            $("#cart-count-badge").text(result);
+            console.log(result);
+        }
+    });
 });

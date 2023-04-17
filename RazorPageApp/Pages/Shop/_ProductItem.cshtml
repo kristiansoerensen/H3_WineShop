@@ -4,7 +4,7 @@
         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             @if (Model.Images != null && @Model.Images.FirstOrDefault() != null)
             {
-                <img class="img-fluid w-100" src="@("/ProductImages/" + Model.Images.FirstOrDefault().Filename)" alt="">
+                <img class="img-fluid w-100" src="@("/ProductImages/" + Model.Images?.FirstOrDefault()?.Filename)" alt="">
             }
             else
             {
@@ -19,7 +19,13 @@
         </div>
         <div class="card-footer d-flex justify-content-between bg-light border">
             <a asp-page="./Details" asp-route-id="@Model.Id" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+            <form action="/Shop/Cart/Index" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="productId" value="@Model.Id"/>
+                    <input type="hidden" name="qty" value="1"/>
+                    <button class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
+            </form>
+            @*<a asp-page="./Cart" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>*@
         </div>
     </a>
 </div>

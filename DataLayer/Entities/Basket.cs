@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace DataLayer.Entities
         [ForeignKey(nameof(UserId))]
         public User? User { get; set; }
         public List<BasketItem>? CartLines { get; set; }
+        [Precision(10, 2)]
+        public decimal? Total { get; set; }
     }
 }

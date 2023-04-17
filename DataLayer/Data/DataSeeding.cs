@@ -92,7 +92,7 @@ namespace DataLayer.Data
                 .RuleFor(p => p.Id, f => f.IndexFaker + 1)
                 .RuleFor(p => p.ProductId, f => f.PickRandom(this.Products).Id)
                 .RuleFor(p => p.BasketId, f => f.PickRandom(this.Baskets).Id)
-                .RuleFor(p => p.QTY, f => (decimal)RandomNumberBetween(1, 30))
+                .RuleFor(p => p.QTY, f => RandomNumberBetween(1, 30))
                 .RuleFor(p => p.CreateDate, f => f.Date.Past())
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(500);
@@ -208,11 +208,11 @@ namespace DataLayer.Data
 
         private static readonly Random random = new Random();
 
-        private static double RandomNumberBetween(double minValue, double maxValue)
+        private static int RandomNumberBetween(int minValue, int maxValue)
         {
-            var next = random.NextDouble();
+            var next = random.NextInt64();
 
-            return minValue + (next * (maxValue - minValue));
+            return (int)((int)minValue + (next * (maxValue - minValue)));
         }
     }
 }

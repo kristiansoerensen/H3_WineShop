@@ -3,60 +3,26 @@ using DataLayer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore;
-using NuGet.ContentModel;
-using System.Security.Claims;
+using RazorPageApp.Pages.Shop.Cart;
 
-namespace RazorPageApp.Pages.Shop
+namespace RazorPageApp.Pages.Shop.Checkout
 {
-    public class CartModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly IDataContext _context;
-        private readonly ILogger<CartModel> _logger;
+        private readonly ILogger<IndexModel> _logger;
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        public List<BasketItem> BasketItems { get; set; } = default!;
 
         public const string SessionKeyBasket = "_BasketId";
 
-        public CartModel(IDataContext context, ILogger<CartModel> logger, UserManager<User> userManager, SignInManager<User> signInManager)
+        public IndexModel(IDataContext context, ILogger<IndexModel> logger, UserManager<User> userManager)
         {
             _context = context;
             _logger = logger;
             _userManager = userManager;
-            _signInManager = signInManager;
         }
-        public async Task<IActionResult> OnGetAsync()
+        public void OnGet()
         {
-            Basket? basket = await GetBasket();
-            if (basket == null)
-            {
-                return Page();
-            }
-            this.BasketItems = await this._context.Baskets.GetBasketItems(basket).ToListAsync();
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int qty, int productId)
-        {
-            Basket? basket = await GetBasket();
-            if (basket == null)
-            {
-                return Page();
-            }
-            Product? product = await this._context.Products.GetById(productId);
-            if (product == null)
-            {
-                return Page();
-            }
-            this._context.Baskets.AddToBasket(basket, product, qty);
-            await this._context.CommitAsync();
-
-            this.BasketItems = await this._context.Baskets.GetBasketItems(basket).ToListAsync();
-            _logger.LogInformation($"#####################basketitems: {BasketItems.Count()}");
-            return Page();
         }
 
         public async Task<Basket?> GetBasket()
