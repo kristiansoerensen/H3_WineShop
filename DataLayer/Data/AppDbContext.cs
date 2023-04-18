@@ -52,8 +52,9 @@ namespace DataLayer.Data
                 .WithMany(c => c.ProductCategories)
                 .HasForeignKey(bc => bc.CategoryId);
 
-            //this.SeedUsers(modelBuilder);
-            //this.SeedUserRoles(modelBuilder);
+            this.SeedUsers(modelBuilder);
+            this.SeedRoles(modelBuilder);
+            this.SeedUserRoles(modelBuilder);
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Country> Countries { get; set; }

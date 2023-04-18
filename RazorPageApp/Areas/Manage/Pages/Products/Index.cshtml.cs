@@ -5,9 +5,11 @@ using DataLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using DataLayer.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RazorPageApp.Areas.Manage.Pages.Products
 {
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly IDataContext _context;

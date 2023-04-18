@@ -1,4 +1,6 @@
-﻿<header>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+<header>
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="">
@@ -21,7 +23,10 @@
                             </div>
                         </div>
                         <a class="nav-item nav-link" asp-area="" asp-page="/Contact">Contact</a>
-                        <a class="nav-item nav-link" href="/Manage">Manage</a>
+                        @if (await UserManager.GetUserAsync(User) != null && await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Admin"))
+                        {
+                            <a class="nav-item nav-link" href="/Manage">Manage</a>
+                        }
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <partial name="_LoginPartial" />
