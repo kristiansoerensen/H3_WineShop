@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 using RazorPageApp.Pages.Shop.Cart;
+using System.Net.Mail;
+using System.Net;
 
 namespace RazorPageApp.Pages.Shop.Checkout
 {
@@ -15,6 +18,7 @@ namespace RazorPageApp.Pages.Shop.Checkout
         private readonly ILogger<IndexModel> _logger;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _config;
         public List<BasketItem> BasketItems { get; set; } = default!;
         public Basket basket { get; set; } = default!;
         public List<SelectListItem> Countries { get; set; } = default!;
@@ -27,12 +31,13 @@ namespace RazorPageApp.Pages.Shop.Checkout
         public const string SessionKeyBasket = "_BasketId";
         
 
-        public IndexModel(IDataContext context, ILogger<IndexModel> logger, UserManager<User> userManager, SignInManager<User> signInManager)
+        public IndexModel(IDataContext context, ILogger<IndexModel> logger, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration config)
         {
             _context = context;
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _config = config;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -76,7 +81,38 @@ namespace RazorPageApp.Pages.Shop.Checkout
             this._context.Baskets.Update(basket);
             await this._context.CommitAsync();
             HttpContext.Session.Remove(SessionKeyBasket);
-            return RedirectToPage("/Index");
+
+
+
+            if (ModelState.IsValid)
+            {
+                var senderEmail = new MailAddress(_config.GetValue<string>("MailSettings:Mail"), _config.GetValue<string>("MailSettings:DisplayName"));
+                var receiverEmail = new MailAddress(BillingAddress.Email, "Receiver");
+                var password = _config.GetValue<string>("MailSettings:Password");
+                var sub = $"Order#{basket.Id}";
+                var body = $"Thanks for your Order#{basket.Id}";
+                var smtp = new SmtpClient
+                {
+                    Host = _config.GetValue<string>("MailSettings:Host"),
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password)
+                };
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+                    Subject = sub,
+                    Body = body
+                })
+                {
+                    smtp.Send(mess);
+                }
+                return RedirectToPage();
+            }
+
+
+            return RedirectToPage();
         }
 
         public async Task<Basket?> GetBasket()

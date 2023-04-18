@@ -49,6 +49,13 @@
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="Product.Featured" class="control-label"></label>
+                <input asp-for="Product.Featured" class="form-control" />
+                <span asp-validation-for="Product.Featured" class="text-danger"></span>
+            </div>
+        </div>
         <div class="col-sm-12">
             <div class="form-group">
                 <label asp-for="ImageIds" class="control-label">Current Images</label>
@@ -60,7 +67,7 @@
                 <div class="upload__btn-box">
                     <label class="upload__btn">
                         <p>Upload new images</p>
-                        <input type="file" multiple="" data-max_length="20" name="Uploads" value="@Model.Uploads." class="upload__inputfile">
+                        <input type="file" multiple="" data-max_length="20" name="Uploads" value="@Model.Uploads" class="upload__inputfile">
                     </label>
                 </div>
                 <div class="upload__img-wrap">
