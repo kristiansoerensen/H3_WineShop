@@ -10,7 +10,7 @@ namespace DataLayer.Data
     public interface IDataContext
     {
         IProductRepository Products { get; }
-        IProductImageRepository ProductImages { get; }
+        IImageRepository Images { get; }
         ICountryRepository Countries { get; }
         ICategoryRepository Categories { get; }
         IBasketItemRepository BasketItems { get; }
@@ -18,7 +18,6 @@ namespace DataLayer.Data
         IUserRepository Users { get; }
         IBrandRepository Brands { get; }
         IProductCategoryRepository ProductCategories { get; }
-        IAddressRepository Addresses { get; }
         IPaymentProviderRepository PaymentProviders { get; }
         Task CommitAsync();
     }

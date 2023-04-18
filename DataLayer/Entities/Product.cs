@@ -31,7 +31,7 @@ namespace DataLayer.Entities
         [DisplayName("Brand")]
         [ForeignKey(nameof(BrandId))]
         public Brand? Brand { get; set; }
-        public ICollection<ProductImage>? Images { get; set; }
-
+        public ICollection<Image>? Images { get; set; }
+        public bool Featured { get; set; }
     }
 }

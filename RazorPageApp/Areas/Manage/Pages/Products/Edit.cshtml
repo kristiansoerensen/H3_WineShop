@@ -1,0 +1,88 @@
+﻿@page
+@model RazorPageApp.Areas.Manage.Pages.Products.EditModel
+@{
+    ViewData["Title"] = "Manage Products";
+    ViewData["ActivePage"] = ManageNavPages.ProductIndex;
+}
+
+<h3>@ViewData["Title"]</h3>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Product.Id" />
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="Product.BrandId" class="control-label"></label>
+                <select asp-for="Product.BrandId" asp-items="Model.Brands" class="form-control"></select>
+                <span asp-validation-for="Product.BrandId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="CategoryIds" class="control-label">Categories</label>
+                <select asp-for="CategoryIds" asp-items="Model.Categories" class="form-control form-select-multi" multiple="multiple"></select>
+                <span asp-validation-for="CategoryIds" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="Product.SKU" class="control-label"></label>
+                <input asp-for="Product.SKU" class="form-control" />
+                <span asp-validation-for="Product.SKU" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label asp-for="ImageIds" class="control-label">Current Images</label>
+                <select asp-for="ImageIds" asp-items="Model.Images" class="form-control form-select-multi" multiple="multiple"></select>
+                <span asp-validation-for="ImageIds" class="text-danger"></span>
+            </div>
+        
+            <div class="upload__box">
+                <div class="upload__btn-box">
+                    <label class="upload__btn">
+                        <p>Upload new images</p>
+                        <input type="file" multiple="" data-max_length="20" name="Uploads" value="@Model.Uploads." class="upload__inputfile">
+                    </label>
+                </div>
+                <div class="upload__img-wrap">
+                    @*@for (int i = 0; i < Model.Uploads.Count(); i++)
+                    {
+                        <div class="upload__img-box">
+                            <div class="img-bg" data-number="@i" data-file="@Model.Uploads[i].FileName" style="background-image: url(@Model.ConvertToBase64(Model.Uploads[i]))"></div>
+                        </div>
+                    }*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

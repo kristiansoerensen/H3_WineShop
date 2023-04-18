@@ -1,58 +1,4 @@
 ﻿<header>
-    @*<!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <!-- Container wrapper -->
-        <div class="container-fluid">
-            <!-- Toggle button -->
-            <button class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Navbar brand -->
-                <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                    <img src="https://www.solkaersvin.dk/wp-content/uploads/2020/07/Solkaers-Vinimport-1.png"
-                         height="25"
-                         alt="Solkaers Vin"
-                         loading="lazy" />
-                </a>
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Products/index">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
-                    </li>
-                </ul>
-                <!-- Left links -->
-            </div>
-            <!-- Collapsible wrapper -->
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <!-- Icon -->
-                <a class="text-reset me-3 no-underline" href="#">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-
-                <partial name="_LoginPartial" />
-                </div>
-            </div>
-            <!-- Right elements -->
-        </div>
-        <!-- Container wrapper -->
-    </nav>
-    <!-- Navbar -->*@
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="">
@@ -75,6 +21,7 @@
                             </div>
                         </div>
                         <a class="nav-item nav-link" asp-area="" asp-page="/Contact">Contact</a>
+                        <a class="nav-item nav-link" href="/Manage">Manage</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <partial name="_LoginPartial" />

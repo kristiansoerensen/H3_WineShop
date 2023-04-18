@@ -25,7 +25,7 @@
                             <td class="align-middle">
                                 @if (basketItem.Product?.Images != null && @basketItem.Product.Images.FirstOrDefault() != null)
                                 {
-                                    <img style="width: 50px;" src="@("/ProductImages/" + basketItem.Product?.Images.FirstOrDefault()?.Filename)" alt="">
+                                    <img style="width: 50px;" src="@("/Images/" + basketItem.Product?.Images.FirstOrDefault()?.Filename)" alt="">
                                 }
                                 else
                                 {

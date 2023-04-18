@@ -4,7 +4,7 @@
         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             @if (Model.Images != null && @Model.Images.FirstOrDefault() != null)
             {
-                <img class="img-fluid w-100" src="@("/ProductImages/" + Model.Images?.FirstOrDefault()?.Filename)" alt="">
+                <img class="img-fluid w-100" src="@("/Images/" + Model.Images?.FirstOrDefault()?.Filename)" alt="">
             }
             else
             {

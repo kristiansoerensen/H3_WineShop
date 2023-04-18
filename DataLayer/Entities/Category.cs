@@ -14,5 +14,7 @@ namespace DataLayer.Entities
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public ICollection<ProductCategory>? ProductCategories { get; set; }
+        public int? ImageId { get; set; }
+        public Image? Image { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace DataLayer.Data
         public List<Category> Categories { get; set; }
         public List<Country> Countries { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
-        public List<ProductImage> ProductImages { get; set; }
+        public List<Image> Images { get; set; }
         public List<PaymentProvider> PaymentProviders { get; set; }
 
 
@@ -87,6 +87,11 @@ namespace DataLayer.Data
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(100);
 
+            foreach (var product in this.Products.Where(p => p.Name.Contains("Refined")))
+            {
+                product.Featured = true;
+            }
+
             Random rnd = new Random();
             this.ProductCategories = new List<ProductCategory>();
             foreach (var item in this.Products)
@@ -116,9 +121,9 @@ namespace DataLayer.Data
                 .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
                 .UseSeed(seed).Generate(500);
 
-            this.ProductImages = new List<ProductImage>
+            this.Images = new List<Image>
             {
-                new Faker<ProductImage>()
+                new Faker<Image>()
                     .RuleFor(p => p.Id, f => 1)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -126,7 +131,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Gorgeous_Wooden_Shoes")
                     .RuleFor(p => p.Filename, f => "Gorgeous_Wooden_Shoes.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker<ProductImage>()
+                new Faker<Image>()
                     .RuleFor(p => p.Id, f => 2)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -134,7 +139,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Gorgeous_Wooden_Shoes2")
                     .RuleFor(p => p.Filename, f => "Gorgeous_Wooden_Shoes2.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 3)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -142,7 +147,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Gorgeous_Wooden_Shoes3")
                     .RuleFor(p => p.Filename, f => "Gorgeous_Wooden_Shoes3.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 4)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -150,7 +155,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Handcrafted_Plastic_Soap")
                     .RuleFor(p => p.Filename, f => "Handcrafted_Plastic_Soap.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 5)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -158,7 +163,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Handcrafted_Plastic_Soap2")
                     .RuleFor(p => p.Filename, f => "Handcrafted_Plastic_Soap2.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 6)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -166,7 +171,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Metal_Chicken")
                     .RuleFor(p => p.Filename, f => "Metal_Chicken.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 7)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -174,7 +179,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Metal_Shoes")
                     .RuleFor(p => p.Filename, f => "Metal_Shoes.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 8)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -182,7 +187,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Metal_Shoes2")
                     .RuleFor(p => p.Filename, f => "Metal_Shoes2.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 9)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -190,7 +195,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Steel_Computer")
                     .RuleFor(p => p.Filename, f => "Steel_Computer.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 10)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -198,7 +203,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Cotton_Cheese")
                     .RuleFor(p => p.Filename, f => "Cotton_Cheese.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 11)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -206,7 +211,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Refined_Soft_Computer")
                     .RuleFor(p => p.Filename, f => "Refined_Soft_Computer.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 12)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -214,7 +219,7 @@ namespace DataLayer.Data
                     .RuleFor(p => p.Name, f => "Incredible_Steel_Mouse")
                     .RuleFor(p => p.Filename, f => "Incredible_Steel_Mouse.jpg")
                     .UseSeed(seed).Generate(),
-                new Faker < ProductImage >()
+                new Faker < Image >()
                     .RuleFor(p => p.Id, f => 13)
                     .RuleFor(p => p.CreateDate, f => f.Date.Past())
                     .RuleFor(p => p.ModifiedDate, f => f.Date.Past())
@@ -225,6 +230,10 @@ namespace DataLayer.Data
 
                 
             };
+            foreach (var category in this.Categories.Take(9))
+            {
+                category.ImageId = category.Id;
+            }
         }
 
         private static readonly Random random = new Random();

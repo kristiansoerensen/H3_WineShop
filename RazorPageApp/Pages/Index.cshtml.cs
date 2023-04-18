@@ -26,8 +26,8 @@ namespace RazorPageApp.Pages
 
         public async Task OnGetAsync()
         {
-            this.Categories = await this._context.Categories.GetAll().Take(6).ToListAsync();
-            this.Products = await this._context.Products.GetAll().Include(p => p.Images).Take(8).ToListAsync();
+            this.Categories = await this._context.Categories.GetAll().Include(c => c.Image).Take(6).ToListAsync();
+            this.Products = await this._context.Products.GetAll().Where(p => p.Featured == true).Include(p => p.Images).Take(8).ToListAsync();
         }
     }
 }

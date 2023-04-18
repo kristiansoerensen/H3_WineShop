@@ -15,7 +15,7 @@ namespace DataLayer.Data
 
         public IProductRepository Products { get; private set; }
 
-        public IProductImageRepository ProductImages { get; private set; }
+        public IImageRepository Images { get; private set; }
 
         public ICountryRepository Countries { get; private set; }
 
@@ -37,7 +37,7 @@ namespace DataLayer.Data
             var _logger = logger.CreateLogger("logs");
 
             this.Products = new ProductRepository(context, _logger);
-            this.ProductImages = new ProductImageRepository(context, _logger);
+            this.Images = new ImageRepository(context, _logger);
             this.Countries = new CountryRepository(context, _logger);
             this.Categories = new CategoryRepository(context, _logger);
             this.BasketItems = new BasketItemRepository(context, _logger);
