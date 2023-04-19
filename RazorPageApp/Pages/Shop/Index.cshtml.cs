@@ -1,10 +1,12 @@
 using DataLayer.Data;
 using DataLayer.Entities;
 using DataLayer.ExtensionMethods;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.ContentModel;
 using System;
 using System.Linq;
 
@@ -30,6 +32,7 @@ namespace RazorPageApp.Pages.Shop
         public int PageSize { get; set; } = 9;
         [BindProperty(SupportsGet = true)]
         public int Pages { get; set; } = default!;
+
 
         public IndexModel(IDataContext context, ILogger<IndexModel> logger)
         {
