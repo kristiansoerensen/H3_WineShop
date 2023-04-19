@@ -12,6 +12,7 @@ namespace DataLayer.Entities
     {
         public DateTime CreateDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public ICollection<Address>? Addresses { get; set; }
+        public int? BillingAddressId { get; set; }
+        public Address? BillingAddress { get; set; }
     }
 }
