@@ -47,6 +47,10 @@ namespace RazorPageApp.Pages.Shop.Checkout
                 return Page();
             }
             User? user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                user = this._context.Users.GetAll().Where(u => u.Id == user.Id).Include(u => u.BillingAddress).FirstOrDefault();
+            }
             if (user != null && basket.UserId != null)
             {
                 basket.UserId = user.Id;
@@ -90,6 +94,7 @@ namespace RazorPageApp.Pages.Shop.Checkout
             if (user != null)
             {
                 user.BillingAddress = BillingAddress;
+                this._context.Users.Update(user);
             }
             await this._context.CommitAsync();
             HttpContext.Session.Remove(SessionKeyBasket);
