@@ -1,6 +1,6 @@
 ﻿@model Product
 <div class="card product-item border-0 mb-4">
-    <a asp-page="./Details" asp-route-id="@Model.Id">
+    <a asp-page="/Shop/Details" asp-route-id="@Model.Id">
         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             @if (Model.Images != null && @Model.Images.FirstOrDefault() != null)
             {
@@ -14,7 +14,7 @@
         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
             <h6 class="text-truncate mb-3">@Model.Name</h6>
             <div class="d-flex justify-content-center">
-                <h6>@Model.Price</h6><h6 class="text-muted ml-2"><del>@Model.Price</del></h6>
+                <h6>$@Model.Price</h6><h6 class="text-muted ml-2"></h6>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-between bg-light border">
