@@ -27,6 +27,10 @@ namespace WebAPI.Controllers
                 .GetAll().Where(x => x.Id == id)
                 .ToDTOs()
                 .FirstOrDefault();
+            if (DTO == null)
+            {
+                return NotFound();
+            }
             return Ok(DTO);
         }
 

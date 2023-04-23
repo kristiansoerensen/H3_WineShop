@@ -32,6 +32,10 @@ namespace WebAPI.Controllers
                 .Include(x => x.PaymentProvider)
                 .ToDTOs()
                 .FirstOrDefault();
+            if (DTO == null)
+            {
+                return NotFound();
+            }
             return Ok(DTO);
         }
 

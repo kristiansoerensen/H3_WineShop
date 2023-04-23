@@ -28,6 +28,10 @@ namespace WebAPI.Controllers
                 .Include(x => x.Products)
                 .ToDTOs()
                 .FirstOrDefault();
+            if (DTO == null)
+            {
+                return NotFound();
+            }
             return Ok(DTO);
         }
 

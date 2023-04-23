@@ -28,6 +28,10 @@ namespace WebAPI.Controllers
                 .Include(x => x.BillingAddress)
                 .ToDTOs()
                 .FirstOrDefault();
+            if (DTO == null)
+            {
+                return NotFound();
+            }
             return Ok(DTO);
         }
 
