@@ -1,5 +1,6 @@
 ﻿using DataLayer.Core.Repositories;
 using DataLayer.Core.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,12 @@ namespace DataLayer.Data
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
+        where TEntity : class
+        {
+            return this._context.Entry(entity);
         }
     }
 }

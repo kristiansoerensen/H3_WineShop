@@ -1,4 +1,5 @@
 ﻿using DataLayer.Core.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,6 @@ namespace DataLayer.Data
         IProductCategoryRepository ProductCategories { get; }
         IPaymentProviderRepository PaymentProviders { get; }
         Task CommitAsync();
+        EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
     }
 }
