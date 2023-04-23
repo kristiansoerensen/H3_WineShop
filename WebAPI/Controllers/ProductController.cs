@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
                 .GetAll().Where(x => x.Id == id)
                 .Include(p => p.ProductCategories)
                 .Include(p => p.Images)
-                .ToProductDTOs()
+                .ToDTOs()
                 .FirstOrDefault();
             return Ok(productDTO);
         }
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            await this._context.Products.Add(productDTO.FromProductDTO());
+            await this._context.Products.Add(productDTO.FromDTO());
             await this._context.CommitAsync();
             return Ok();
         }
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            Product product = productDTO.FromProductDTO();
+            Product product = productDTO.FromDTO();
             product.Images = this._context.Images.GetAll().Where(i => productDTO.ImageIds.Contains(i.Id)).ToList();
             this._context.Products.Update(product);
             await this._context.CommitAsync();

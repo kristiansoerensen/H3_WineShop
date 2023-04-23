@@ -13,7 +13,7 @@ namespace DataLayer.ExtensionMethods
     public static class ProductExtensions
     {
         //used by LINQ to SQL
-        public static IEnumerable<ProductDTO> ToProductDTOs(this IQueryable<Product> source)
+        public static IEnumerable<ProductDTO> ToDTOs(this IQueryable<Product> source)
         {
             List<Product> products = source.ToList();
             List<ProductDTO> productDTOs = new List<ProductDTO>();
@@ -39,7 +39,7 @@ namespace DataLayer.ExtensionMethods
         }
         
         //used by LINQ to Linq
-        public static IEnumerable<ProductDTO> ToProductDTOs(this IEnumerable<Product> source)
+        public static IEnumerable<ProductDTO> ToDTOs(this IEnumerable<Product> source)
         {
             List<ProductDTO> productDTOs = new List<ProductDTO>();
             foreach (Product item in source)
@@ -63,7 +63,7 @@ namespace DataLayer.ExtensionMethods
             return productDTOs;
         }
 
-        public static Product FromProductDTO(this ProductDTO source)
+        public static Product FromDTO(this ProductDTO source)
         {
             Product product = new Product
                 {

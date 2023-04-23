@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
                 default:
                     break;
             }
-            List<ProductDTO> products = query.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).Include(p => p.ProductCategories).ToProductDTOs().ToList();
+            List<ProductDTO> products = query.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).Include(p => p.ProductCategories).ToDTOs().ToList();
             return Ok(products);
         }
     }

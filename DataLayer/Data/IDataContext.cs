@@ -19,6 +19,7 @@ namespace DataLayer.Data
         IUserRepository Users { get; }
         IBrandRepository Brands { get; }
         IProductCategoryRepository ProductCategories { get; }
+        IAddressRepository Addresses { get; }
         IPaymentProviderRepository PaymentProviders { get; }
         Task CommitAsync();
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
