@@ -39,9 +39,9 @@ namespace WebAPI.Controllers
 
         // POST api/<ProductController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProductDTO? productDTO)
+        public async Task<IActionResult> Post([FromBody] ProductDTO? DTO)
         {
-            if ( productDTO == null )
+            if ( DTO == null )
             {
                 return NoContent();
             }

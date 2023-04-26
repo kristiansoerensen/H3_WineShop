@@ -4,6 +4,7 @@ using DataLayer.DTOs;
 using DataLayer.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -77,8 +78,20 @@ namespace WebAPI.Controllers
                 default:
                     break;
             }
+            //List<Product> products = query.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).Include(p => p.ProductCategories).ToList();
             List<ProductDTO> products = query.Page(CurrentPage, PageSize).Include(p => p.Brand).Include(p => p.Images).Include(p => p.ProductCategories).ToDTOs().ToList();
-            return Ok(products);
+            int numOfPages = PageSize != 0 ? ((query.Count() - 1) / PageSize) + 1 : 1;
+            PagedProducts pagedProducts = new PagedProducts
+            {
+                CategoryIds = CategoryIds != null ? CategoryIds : new List<int>(),
+                Products = products,
+                PageSize = PageSize,
+                CurrentPage = CurrentPage,
+                OrderBy = OrderBy,
+                SearchTerm = SearchTerm != null ? SearchTerm : string.Empty,
+                NumOfPages = numOfPages
+            };
+            return Ok(pagedProducts);
         }
     }
 }
