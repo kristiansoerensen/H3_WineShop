@@ -55,9 +55,10 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            await this._context.Countries.Add(DTO.FromDTO());
+            Country item = DTO.FromDTO();
+            await this._context.Countries.Add(item);
             await this._context.CommitAsync();
-            return Ok();
+            return Ok(item.Id);
         }
 
         // PUT api/<ProductController>/5

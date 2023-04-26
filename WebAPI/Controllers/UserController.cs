@@ -56,9 +56,10 @@ namespace WebAPI.Controllers
             {
                 return NoContent();
             }
-            await this._context.Users.Add(DTO.FromDTO());
+            User item = DTO.FromDTO();
+            await this._context.Users.Add(item);
             await this._context.CommitAsync();
-            return Ok();
+            return Ok(item.Id);
         }
 
         // PUT api/<ProductController>/5
