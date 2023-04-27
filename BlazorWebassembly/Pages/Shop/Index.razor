@@ -1,6 +1,7 @@
 ﻿@page "/shop"
 @using BlazorWebassembly.Pages.Shop.Components
-@inject IPagedProductHttpRepository _pagedProductRepository
+@inject IProductHttpRepository _productRepository
+@inject ICategoryHttpRepository _categoryRepository
 
 <!-- Shop Start -->
 <div class="container-fluid pt-5">
@@ -15,23 +16,21 @@
                         <input type="checkbox" class="custom-control-input disabled" disabled checked id="price-all">
                         <label class="custom-control-label" for="price-all">All Price</label>
                     </div>
-                    @foreach (var item in Categories)
-                    {
-                        @*if (item.Selected)
+                    @*<select @bind="CategoryIds">*@
+                        @if (PagedCategories.Categories != null)
                         {
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" name="CategoryIds" onchange="this.form.submit()" checked value="@item.Value" class="custom-control-input" id="category-@item.Value">
-                                <label class="custom-control-label" for="category-@item.Value">@item.Text</label>
-                            </div>
+                            @foreach (var cnt in PagedCategories.Categories)
+                            {
+                                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <label class="custom-control-label" for="category-@cnt.Id.ToString()">
+                                    <InputCheckbox type="checkbox" @bind="CategoryIds" value="@cnt.Id.ToString()" class="custom-control-input"/>
+                                    @cnt.Name
+                                </label>
+                                </div>
+                                @*<option value="@cnt.Id">@cnt.Name</option>*@
+                            }
                         }
-                        else
-                        {
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" name="CategoryIds" onchange="this.form.submit()" value="@item.Value" class="custom-control-input" id="category-@item.Value">
-                                <label class="custom-control-label" for="category-@item.Value">@item.Text</label>
-                            </div>
-                        }*@
-                    }
+                    @*</select>*@
                 </form>
             </div>
             <!-- Price End -->
@@ -132,7 +131,8 @@
 <!-- Shop End -->
 @code {
     public PagedProducts PagedProducts { get; set; } = new PagedProducts();
-    public List<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
+    public PagedCategories PagedCategories { get; set; } = new PagedCategories();
+    private List<string> CategoryIds { get; set; } = new List<string>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -140,11 +140,11 @@
         System.Collections.Specialized.NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
         queryString.Add("PageSize", PagedProducts.PageSize.ToString());
         queryString.Add("CurrentPage", PagedProducts.CurrentPage.ToString());
-        PagedProducts = await _pagedProductRepository.GetPagedProducts(queryString.ToString());
-        //just for testing
-        foreach (var product in PagedProducts.Products)
-        {
-            Console.WriteLine(product.Name);
-        }
+        string? queryStr = queryString.ToString();
+        PagedProducts = await _productRepository.GetPagedProducts(queryStr != null ? queryStr : "");
+
+        PagedCategories = await _categoryRepository.GetPagedCategories(queryStr != null ? queryStr : "");
+        
+
     }
 }

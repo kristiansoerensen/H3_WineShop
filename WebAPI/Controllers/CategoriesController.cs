@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DataLayer.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WebAPI.Controllers
 {
@@ -20,16 +22,24 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] int PageSize, [FromQuery] int CurrentPage)
+        public IActionResult Get([FromQuery] string? SearchTerm, [FromQuery] int PageSize, [FromQuery] int CurrentPage)
         {
             var query = _context.Categories.GetAll();
-            List<CategoryDTO> items = query.Page(CurrentPage, PageSize)
-                .Include(x => x.ProductCategories)
-                .ThenInclude(x => x.Product)
-                .Include(x => x.Image)
-                .ToDTOs()
-                .ToList();
-            return Ok(items);
+            if (SearchTerm != null)
+            {
+                query = query.Where(p => p.Name.Contains(SearchTerm));
+            }
+            List<CategoryDTO> Categries = query.ToDTOs().ToList(); ;
+            int numOfPages = PageSize != 0 ? ((query.Count() - 1) / PageSize) + 1 : 1;
+            PagedCategories pagedProducts = new PagedCategories
+            {
+                Categories = Categries,
+                PageSize = PageSize,
+                CurrentPage = CurrentPage,
+                SearchTerm = SearchTerm != null ? SearchTerm : string.Empty,
+                NumOfPages = numOfPages
+            };
+            return Ok(pagedProducts);
         }
     }
 }

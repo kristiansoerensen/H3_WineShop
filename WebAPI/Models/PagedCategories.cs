@@ -1,14 +1,14 @@
-﻿using BlazorWebassembly.DTOs;
+﻿using DataLayer.DTOs;
 
-namespace BlazorWebassembly.Models
+namespace WebAPI.Models
 {
-    public class PagedProducts
+    public class PagedCategories
     {
         public string SearchTerm { get; set; } = string.Empty;
         public int PageSize { get; set; } = 9;
         public int OrderBy { get; set; } = 0;
         public int CurrentPage { get; set; } = 1;
         public int NumOfPages { get; set; } = 1;
-        public List<ProductDTO> Products { get; set; } = new List<ProductDTO>();
+        public List<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
     }
 }

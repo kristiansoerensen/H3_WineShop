@@ -14,7 +14,7 @@ namespace BlazorWebassembly.Repository
         }
         public async Task<PagedCategories> GetPagedCategories(string queryString = "")
         {
-            var response = await _client.GetAsync("products?" + queryString);
+            var response = await _client.GetAsync("categories?" + queryString);
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {

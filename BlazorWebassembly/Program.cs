@@ -8,6 +8,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7043/api/") });
-builder.Services.AddScoped<IPagedProductHttpRepository, ProductHttpRepository>();
+builder.Services.AddScoped<IProductHttpRepository, ProductHttpRepository>();
+builder.Services.AddScoped<ICategoryHttpRepository, CategoryHttpRepository>();
 
 await builder.Build().RunAsync();
