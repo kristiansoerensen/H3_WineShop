@@ -4,37 +4,37 @@ using BlazorWebassembly.DTOs;
 
 namespace BlazorWebassembly.Repository
 {
-    public class ProductHttpRepository : IProductHttpRepository
+    public class BasketHttpRepository : IBasketHttpRepository
     {
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
-        public ProductHttpRepository(HttpClient client)
+        public BasketHttpRepository(HttpClient client)
         {
             _client = client;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         }
-        public async Task<PagedProducts> GetPagedProducts(string queryString = "")
-        {
-            var response = await _client.GetAsync("products?" + queryString);
-            var content = await response.Content.ReadAsStringAsync();
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new ApplicationException(content);
-            }
-            var PagedProducts = JsonSerializer.Deserialize<PagedProducts>(content, _options);
-            return PagedProducts != null ? PagedProducts : new PagedProducts();
-        }
         
-        public async Task<ProductDTO> GetProduct(int id, string queryString = "")
+        public async Task<BasketDTO> GetBasket(int id, string queryString = "")
         {
-            var response = await _client.GetAsync("product/" + id + "?" + queryString);
+            var response = await _client.GetAsync("basket/" + id + "?" + queryString);
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
                 throw new ApplicationException(content);
             }
-            var Product = JsonSerializer.Deserialize<ProductDTO>(content, _options);
-            return Product;
+            var item = JsonSerializer.Deserialize<BasketDTO>(content, _options);
+            return item != null ? item : new BasketDTO();
+        }
+
+        public async Task<int?> CreateBasket(BasketDTO basket)
+        {
+            var response = await _client.PostAsync("basket", new StringContent(JsonSerializer.Serialize<BasketDTO>(basket)));
+            var content = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
+            return JsonSerializer.Deserialize<int>(content, _options);
         }
     }
 }

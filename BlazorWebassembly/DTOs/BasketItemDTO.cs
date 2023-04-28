@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BlazorWebassembly.DTOs
@@ -17,5 +18,8 @@ namespace BlazorWebassembly.DTOs
         public int ProductId { get; set; }
         public int QTY { get; set; } // Quantity of products
         public decimal? Total { get; set; }
+
+        public ProductDTO? Product { get; set; }
+
     }
 }

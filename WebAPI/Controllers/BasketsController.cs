@@ -20,10 +20,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] int PageSize, [FromQuery] int CurrentPage)
+        public IActionResult Get([FromQuery] int basketId)
         {
             var query = _context.Baskets.GetAll();
-            List<BasketDTO> items = query.Page(CurrentPage, PageSize)
+            List<BasketDTO> items = query
                 .Include(x => x.User)
                 .Include(x => x.CartLines)
                 .Include(x => x.BillingAddress)

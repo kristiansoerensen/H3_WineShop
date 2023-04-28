@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPageApp", "RazorPageAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{C1220254-718C-44D1-9A08-3AFF2BA21C46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebassembly", "BlazorWebassembly\BlazorWebassembly.csproj", "{2F175590-CD2A-43B9-925D-03D021681C27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebassembly", "BlazorWebassembly\BlazorWebassembly.csproj", "{2F175590-CD2A-43B9-925D-03D021681C27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

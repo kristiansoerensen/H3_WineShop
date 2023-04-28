@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace BlazorWebassembly.DTOs
 {
@@ -27,10 +28,6 @@ namespace BlazorWebassembly.DTOs
         public List<int>? CategoryIds { get; set; }
         public List<int>? ImageIds { get; set; }
 
-        public List<ImageDTO> GetImages()
-        {
-            var images = new List<ImageDTO>();
-            return images;
-        }
+        public List<ImageDTO>? Images { get; set; }
     }
 }
