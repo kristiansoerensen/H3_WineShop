@@ -16,7 +16,7 @@ namespace BlazorWebassembly.Repository
         
         public async Task<ImageDTO> GetImage(int id, string queryString = "")
         {
-            var response = await _client.GetAsync("basket/" + id + "?" + queryString);
+            var response = await _client.GetAsync("image/" + id + "?" + queryString);
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {

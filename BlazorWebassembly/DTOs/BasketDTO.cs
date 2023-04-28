@@ -19,6 +19,5 @@ namespace BlazorWebassembly.DTOs
         public int? ShippingAddressId { get; set; }
         public int? PaymentProviderId { get; set; }
         public string state { get; set; } = "draft";
-        public ProductDTO? Product { get; set; }
     }
 }
